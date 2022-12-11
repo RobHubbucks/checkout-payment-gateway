@@ -1,2 +1,2 @@
-# checkout.payment-gateway
+# checkout-payment-gateway
 checkout.com technical challenge
