@@ -2,6 +2,11 @@
 
 namespace Checkout.PaymentGateway.DataAccess
 {
+    /// <summary>
+    /// Simple in memory repository as placeholder for a proper database repository
+    /// </summary>
+    /// <typeparam name="TId"></typeparam>
+    /// <typeparam name="TItem"></typeparam>
     public class InMemoryRepository<TId, TItem> : IRepository<TId, TItem> where TId : notnull
     {
         private readonly ConcurrentDictionary<TId, TItem> _collection;

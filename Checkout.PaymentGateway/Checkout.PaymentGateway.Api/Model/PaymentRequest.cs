@@ -13,7 +13,7 @@
 
         public Card CardDetails { get; set; }
 
-        public Address BillingAddress { get; set; }
+        public Address? BillingAddress { get; set; }
 
         public string Currency { get; set; }
 

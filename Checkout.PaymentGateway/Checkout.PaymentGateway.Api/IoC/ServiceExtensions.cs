@@ -2,6 +2,7 @@
 using Checkout.PaymentGateway.Api.Dto;
 using Checkout.PaymentGateway.Api.Model;
 using Checkout.PaymentGateway.Api.Service;
+using Checkout.PaymentGateway.Api.Service.AcquiringBank;
 using Checkout.PaymentGateway.DataAccess;
 
 namespace Checkout.PaymentGateway.Api.IoC
@@ -14,6 +15,7 @@ namespace Checkout.PaymentGateway.Api.IoC
             services.AddScoped<IMapper<PaymentRequestDto, PaymentRequest>, PaymentRequestMapper>();
             services.AddScoped<IMapper<PaymentResultDto, PaymentResult>, PaymentResultMapper>();
             services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IAcquiringBankService, AcquiringBankService>();
 
             services.AddSingleton<IRepository<string, PaymentDetails>, InMemoryRepository<string, PaymentDetails>>();
         }

@@ -4,11 +4,11 @@
     {
         public PaymentResultDto() {}
 
-        public PaymentResultDto(string merchantReference, string paymentId, int statusCode, string status)
+        public PaymentResultDto(string merchantReference, string paymentId, string status)
         {
             MerchantReference = merchantReference;
             PaymentId = paymentId;
-            Status = new PaymentStatusDto(statusCode, status);
+            Status = new PaymentStatusDto(status);
         }
 
         public string MerchantReference { get; set; } = null!;

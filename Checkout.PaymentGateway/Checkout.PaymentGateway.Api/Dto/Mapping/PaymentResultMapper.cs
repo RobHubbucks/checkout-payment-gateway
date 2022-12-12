@@ -14,7 +14,7 @@ namespace Checkout.PaymentGateway.Api.Dto.Mapping
             if (input == null)
                 return null;
 
-            return new PaymentResultDto(input.MerchantReference, input.PaymentId, input.StatusCode, input.Status);
+            return new PaymentResultDto(input.MerchantReference, input.PaymentId, input.Status);
         }
     }
 }

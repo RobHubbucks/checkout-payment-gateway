@@ -28,6 +28,7 @@ namespace Checkout.PaymentGateway.Api.Controllers
         }
 
         [HttpPost]
+        [Route("/payments")]
         public async Task<IActionResult> MakePayment([FromBody] PaymentRequestDto request)
         {
             var paymentRequest = _paymentRequestMapper.Map(request);
@@ -43,6 +44,7 @@ namespace Checkout.PaymentGateway.Api.Controllers
         }
 
         [HttpGet]
+        [Route("/payments/{paymentId}")]
         public async Task<IActionResult> GetPayment(string paymentId)
         {
             if (string.IsNullOrWhiteSpace(paymentId))

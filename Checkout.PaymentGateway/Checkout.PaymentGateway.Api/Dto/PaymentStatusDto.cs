@@ -4,13 +4,10 @@
     {
         public PaymentStatusDto() { }
 
-        public PaymentStatusDto(int code, string status)
+        public PaymentStatusDto(string status)
         {
-            Code = code;
             Status = status;
         }
-
-        public int Code { get; set; }
 
         public string Status { get; set; } = null!;
     }

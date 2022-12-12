@@ -5,7 +5,7 @@ namespace Checkout.PaymentGateway.Api.Dto
 {
     public abstract class CardDto
     {
-        protected CardDto(int expiryMonth, int expiryYear, string cardholderName)
+        protected CardDto(int expiryMonth, int expiryYear, string? cardholderName = null)
         {
             ExpiryMonth = expiryMonth;
             ExpiryYear = expiryYear;
@@ -22,7 +22,6 @@ namespace Checkout.PaymentGateway.Api.Dto
         [PaymentExpiryDateValidator]
         public int ExpiryYear { get; set; }
 
-        [Required]
-        public string CardholderName { get; set; } = null!;
+        public string? CardholderName { get; set; }
     }
 }

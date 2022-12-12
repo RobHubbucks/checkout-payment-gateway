@@ -7,10 +7,9 @@ namespace Checkout.PaymentGateway.Api.Dto
     {
         private const int CurrencyCodeLength = 3;
 
-        [Required] 
+        [Required]
         public UnMaskedCardDto CardDetails { get; set; } = null!;
 
-        [Required]
         public AddressDto BillingAddress { get; set; } = null!;
 
         [Required]
