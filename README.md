@@ -128,6 +128,8 @@ Unsuccessful transaction 3 (billing address supplied but does not match account)
 }
 ```
 
+Any payment ID given in response to the above can then be used in the paymments/GET endpoint to retrieve the payment details. Note that a couple of requests will fail immediate validation (e.g. expired card) and will not generate a payment ID.
+
 # Project structure/Architecture
 #### Checkout.PaymentGateway.Api
 This is the payment gateway API. It contains two endpoints (post & get payment) as documented by swagger. This project follows a simple CQRS style pattern where the general logic flow is: Request -> DTO -> Command/Query -> Command/Query Handler -> Service -> External API (simulator) + Repository.
