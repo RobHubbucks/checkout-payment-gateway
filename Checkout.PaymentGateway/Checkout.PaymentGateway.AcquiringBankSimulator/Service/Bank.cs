@@ -37,8 +37,12 @@ namespace Checkout.PaymentGateway.AcquiringBankSimulator.Service
 
             var newBalance = balance - payment.Amount;
 
-            if (newBalance > 0)
+            if (newBalance >= 0)
                 account.Balance = newBalance;
+            else
+            {
+                return false;
+            }
 
             return true;
         }
