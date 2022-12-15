@@ -147,7 +147,7 @@ A mock acquiring bank simulator. It exposes a single API endpoint to make a paym
 Unit tests covering the main functionality of the acquiring bank simulator.
 
 # Deployment thoughts
-* Assuming we were wanting to host this in Azure I would:
+Assuming we were wanting to host this in Azure I would:
 * Deploy an app service plan (with scaleout enabled if deemed necessary) to host the API. These plans are flexible so we can change the level of resources at any time according to our needs.
 * Deploy a managed SQL instance for the database.
 * Put the above inside of a VPN, which will stop them being exposed directly to the internet.
