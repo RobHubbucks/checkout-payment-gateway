@@ -1,27 +1,37 @@
-﻿using Checkout.PaymentGateway.Api.Model;
+﻿using Checkout.PaymentGateway.Api.Commands;
+using Checkout.PaymentGateway.Api.Extensions;
+using Checkout.PaymentGateway.Api.Model;
 
 namespace Checkout.PaymentGateway.Api.Dto.Mapping
 {
-    public class PaymentRequestMapper : IMapper<PaymentRequestDto, PaymentRequest>
+    public class PaymentRequestMapper : IMapper<PaymentRequestDto, PaymentRequestCommand>
     {
-        public PaymentRequest? Map(PaymentRequestDto? paymentRequestDto)
+        public PaymentRequestCommand? Map(PaymentRequestDto? paymentRequestDto)
         {
             if (paymentRequestDto == null)
                 return null;
 
-            var card = new Card(paymentRequestDto.CardDetails.Number, paymentRequestDto.CardDetails.Cvv,
+            var card = new Card(paymentRequestDto.CardDetails.Number.SanitiseCardNumber(), paymentRequestDto.CardDetails.Cvv,
                 paymentRequestDto.CardDetails.ExpiryMonth, paymentRequestDto.CardDetails.ExpiryYear,
                 paymentRequestDto.CardDetails.CardholderName);
 
-            var address = new Address(paymentRequestDto.BillingAddress.Address1,
-                paymentRequestDto.BillingAddress.Address2, paymentRequestDto.BillingAddress.Postcode,
-                paymentRequestDto.BillingAddress.City, paymentRequestDto.BillingAddress.Country);
+            var address = GetAddress(paymentRequestDto.BillingAddress);
 
-            return new PaymentRequest(paymentRequestDto.Currency, paymentRequestDto.Amount,
+            return new PaymentRequestCommand(paymentRequestDto.Currency, paymentRequestDto.Amount,
                 paymentRequestDto.MerchantReference, card, address);
         }
 
-        public PaymentRequestDto? Map(PaymentRequest? input)
+        private Address? GetAddress(AddressDto? addressDto)
+        {
+            if (addressDto == null)
+                return null;
+
+            return new Address(addressDto.Address1, addressDto.Address2,
+                addressDto.Postcode, addressDto.City,
+                addressDto.Country);
+        }
+
+        public PaymentRequestDto Map(PaymentRequestCommand? input)
         {
             throw new NotImplementedException();
         }

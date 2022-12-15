@@ -17,8 +17,8 @@ namespace Checkout.PaymentGateway.Api.Dto.Mapping
 
             var cardDetails = new MaskedCardDto(paymentDetails.CardDetails.Number.MaskCardNumber(), paymentDetails.CardDetails.ExpiryMonth, paymentDetails.CardDetails.ExpiryYear, paymentDetails.CardDetails.CardholderName);
 
-            return new PaymentDetailsDto(paymentDetails.PaymentId, paymentDetails.MerchantReference, cardDetails,
-                paymentDetails.Currency, paymentDetails.Amount, new PaymentStatusDto(paymentDetails.Status.ToString()));
+            return new PaymentDetailsDto(paymentDetails.Id, paymentDetails.MerchantReference, cardDetails,
+                paymentDetails.Currency, paymentDetails.Amount, paymentDetails.Status.ToString());
         }
 
     }

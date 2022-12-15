@@ -2,7 +2,7 @@
 {
     public class Address
     {
-        public Address(string address1, string? address2, string postcode, string? city, string country)
+        public Address(string? address1, string? address2, string? postcode, string? city, string? country)
         {
             Address1 = address1;
             Address2 = address2;
@@ -11,14 +11,14 @@
             Country = country;
         }
 
-        public string Address1 { get; set; }
+        public string? Address1 { get; set; }
 
         public string? Address2 { get; set; }
         
-        public string Postcode { get; set; }
+        public string? Postcode { get; set; }
 
         public string? City { get; set; }
         
-        public string Country { get; set; }
+        public string? Country { get; set; }
     }
 }

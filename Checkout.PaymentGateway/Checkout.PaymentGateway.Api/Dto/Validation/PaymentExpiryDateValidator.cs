@@ -15,7 +15,7 @@ namespace Checkout.PaymentGateway.Api.Dto.Validation
             if (cardDetails.ExpiryYear < today.Year)
                 return new ValidationResult(Error);
 
-            if (cardDetails.ExpiryMonth < 1)
+            if (cardDetails.ExpiryMonth < 1 || cardDetails.ExpiryMonth > 12)
                 return new ValidationResult(Error);
 
             if (cardDetails.ExpiryYear == today.Year &&

@@ -18,32 +18,25 @@ namespace Checkout.PaymentGateway.Api.Service
             _logger = logger;
         }
 
-        public async Task<PaymentResult> RequestPayment(PaymentRequest paymentRequest)
+        public async Task<PaymentResult> RequestPayment(PaymentDetails paymentDetails)
         {
-            var paymentId = Guid.NewGuid().ToString();
-
-            var payment = new PaymentDetails(paymentId, paymentRequest.MerchantReference,
-                new Card(paymentRequest.CardDetails.Number, paymentRequest.CardDetails.Cvv,
-                    paymentRequest.CardDetails.ExpiryMonth, paymentRequest.CardDetails.ExpiryYear,
-                    paymentRequest.CardDetails.CardholderName), paymentRequest.Currency, paymentRequest.Amount, Status.Pending);
-
-            await _repository.Add(paymentId, payment);
+            await _repository.Add(paymentDetails.Id, paymentDetails);
 
             try
             {
-                var bankResult = await _acquiringBankService.ProcessPayment(GetBankPaymentRequestDto(paymentRequest));
+                var bankResult = await _acquiringBankService.ProcessPayment(GetBankPaymentRequestDto(paymentDetails));
 
-                payment.Status = BankStatusToStatus(bankResult.Status);
+                paymentDetails.Status = bankResult == null ? Status.Declined : BankStatusToStatus(bankResult.ResponseCode);
             }
             catch (PaymentProcessingException e)
             {
-                _logger.LogError(exception: e, message: "Acquiring bank payment processing error for payment ID {paymentId}", paymentId);
-                payment.Status = Status.Declined;
+                _logger.LogError(exception: e, message: "Acquiring bank payment processing error for payment ID {paymentId}", paymentDetails.Id);
+                paymentDetails.Status = Status.Declined;
             }
 
-            await _repository.Update(paymentId, payment);
+            await _repository.Update(paymentDetails.Id, paymentDetails);
 
-            return new PaymentResult(payment.MerchantReference, paymentId, payment.Status.ToString());
+            return new PaymentResult(paymentDetails.MerchantReference, paymentDetails.Id, paymentDetails.Status.ToString());
         }
 
         public async Task<PaymentDetails?> GetPayment(string paymentId)
@@ -53,15 +46,14 @@ namespace Checkout.PaymentGateway.Api.Service
             return payment;
         }
 
-        private ProcessPaymentRequestDto GetBankPaymentRequestDto(PaymentRequest paymentRequest)
+        private ProcessPaymentRequestDto GetBankPaymentRequestDto(PaymentDetails paymentDetails)
         {
             return new ProcessPaymentRequestDto(
-                paymentRequest.CardDetails.Number, paymentRequest.CardDetails.Cvv, paymentRequest.CardDetails.ExpiryMonth, 
-                paymentRequest.CardDetails.ExpiryYear, paymentRequest.Currency, paymentRequest.Amount, paymentRequest.CardDetails.CardholderName,
-                paymentRequest.BillingAddress?.Address1, paymentRequest.BillingAddress?.Address2, paymentRequest.BillingAddress?.Postcode, paymentRequest.BillingAddress?.City, paymentRequest.BillingAddress?.Country);
+                paymentDetails.CardDetails.Number, paymentDetails.CardDetails.Cvv, paymentDetails.CardDetails.ExpiryMonth, 
+                paymentDetails.CardDetails.ExpiryYear, paymentDetails.Currency, paymentDetails.Amount, paymentDetails.CardDetails.CardholderName,
+                paymentDetails.BillingAddress?.Address1, paymentDetails.BillingAddress?.Address2, paymentDetails.BillingAddress?.Postcode, paymentDetails.BillingAddress?.City, paymentDetails.BillingAddress?.Country);
         }
 
-        // This is just to simulate the acquiring bank having a different set of status codes to the payment gateway
         private Status BankStatusToStatus(int bankStatus)
         {
             switch (bankStatus)

@@ -1,6 +1,6 @@
 ﻿using Checkout.PaymentGateway.Api.Extensions;
 
-namespace Checkout.PaymentGateway.Tests.Unit
+namespace Checkout.PaymentGateway.Api.Tests.Unit
 {
     [TestFixture]
     public class ExtensionsTests

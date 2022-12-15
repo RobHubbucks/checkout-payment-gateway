@@ -4,7 +4,7 @@ namespace Checkout.PaymentGateway.Api.Service
 {
     public interface IPaymentService
     {
-        Task<PaymentResult> RequestPayment(PaymentRequest paymentRequest);
+        Task<PaymentResult> RequestPayment(PaymentDetails paymentRequest);
 
         Task<PaymentDetails?> GetPayment(string paymentId);
     }

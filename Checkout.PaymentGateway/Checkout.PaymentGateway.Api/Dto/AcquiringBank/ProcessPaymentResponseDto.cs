@@ -2,6 +2,6 @@
 {
     public class ProcessPaymentResponseDto
     {
-        public int Status { get; set; }
+        public int ResponseCode { get; set; }
     }
 }

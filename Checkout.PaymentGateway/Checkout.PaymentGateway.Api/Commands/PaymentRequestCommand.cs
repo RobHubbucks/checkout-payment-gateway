@@ -1,8 +1,10 @@
-﻿namespace Checkout.PaymentGateway.Api.Model
+﻿using Checkout.PaymentGateway.Api.Model;
+
+namespace Checkout.PaymentGateway.Api.Commands
 {
-    public class PaymentRequest
+    public class PaymentRequestCommand
     {
-        public PaymentRequest(string currency, decimal amount, string merchantReference, Card cardDetails, Address billingAddress)
+        public PaymentRequestCommand(string currency, decimal amount, string merchantReference, Card cardDetails, Address? billingAddress)
         {
             Currency = currency;
             Amount = amount;

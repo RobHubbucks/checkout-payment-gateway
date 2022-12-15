@@ -2,21 +2,24 @@
 {
     public class PaymentDetails
     {
-        public PaymentDetails(string paymentId, string merchantReference, Card cardDetails, string currency, decimal amount, Status status)
+        public PaymentDetails(string id, string merchantReference, Card cardDetails, string currency, decimal amount, Status status, Address? billingAddress)
         {
-            PaymentId = paymentId;
+            Id = id;
             MerchantReference = merchantReference;
             CardDetails = cardDetails;
             Currency = currency;
             Amount = amount;
             Status = status;
+            BillingAddress = billingAddress;
         }
 
-        public string PaymentId { get; set; }
+        public string Id { get; set; }
 
         public string MerchantReference { get; set; }
 
         public Card CardDetails { get; set; }
+
+        public Address? BillingAddress { get; set; }
 
         public string Currency { get; set; }
 

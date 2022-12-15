@@ -2,7 +2,7 @@
 {
     public class PaymentProcessingException : Exception
     {
-        public PaymentProcessingException(string? message, Exception? innerException)
-            :base(message, innerException) { }
+        public PaymentProcessingException(Exception? innerException)
+            :base("Payment processing error", innerException) { }
     }
 }
