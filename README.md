@@ -2,7 +2,7 @@
 checkout.com technical challenge
 
 # Running the app from Visual Studio
-* If not already set, set multiple startup projects: Checkout.PaymentGateway.Api and Checkout.PaymentGateway.AcquiringBankSimulator
+* Set multiple startup projects: Checkout.PaymentGateway.Api and Checkout.PaymentGateway.AcquiringBankSimulator
 * Hit F5, on first run accept SSL certificates to avoid SSL warnings
 
 # Sample requests
