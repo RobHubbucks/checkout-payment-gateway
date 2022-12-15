@@ -2,8 +2,8 @@
 checkout.com technical challenge
 
 # Running the app from Visual Studio
-If not already set, set multiple startup projects: Checkout.PaymentGateway.Api and Checkout.PaymentGateway.AcquiringBankSimulator
-Hit F5, on first run accept SSL certificates to avoid SSL warnings
+*If not already set, set multiple startup projects: Checkout.PaymentGateway.Api and Checkout.PaymentGateway.AcquiringBankSimulator
+*Hit F5, on first run accept SSL certificates to avoid SSL warnings
 
 # Sample requests
 
@@ -155,15 +155,9 @@ Duplicate everything to a second region for redunancy - We would need to replica
 
 # Areas for improvement/missing bits
 * Authentication: Due to time constraints there is no authentication on either API. In reality we'd want to use some form of machine to machine authentication using an API key.
-
 * Data storage: Obviously instead of an in-memory repository we'd want to store our payments in a database (probably alongside other data e.g. we'd likely want to store customer details as well as prior payments). A relational database e.g. SQL server would be my first choice for this.
-
 * Asynchronous payments: In the case of payments that require some sort of customer interaction e.g. 3DS we would want an async payment flow.
-
 * Validation: We aren't really validating that customer billing addresses actually exist. We also aren't trying to do any currency conversion (or anything with currency other than validating that the currency code is real).
-
 * Project structure: We'd probably want to move some of the classes in the main API project out into class libraries for reuse purporses, e.g. everything in the Service folder.
-
 * Tests: Integration tests would be helpful but due to time constraints there aren't any. They would take the form of self hosting the payment gateway API and running requests through it that communicated with an externally hosted bank simulator.
-
 * Misc: The bank simulator response is just a status code, we'd probably want to include payment IDs and other bits in there ideally.
