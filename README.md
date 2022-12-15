@@ -128,7 +128,7 @@ Unsuccessful transaction 3 (billing address supplied but does not match account)
 }
 ```
 
-Any payment ID given in response to the above can then be used in the paymments/GET endpoint to retrieve the payment details. Note that a couple of requests will fail immediate validation (e.g. expired card) and will not generate a payment ID.
+Any payment ID given in response to the above can then be used in the payments/GET endpoint to retrieve the payment details. Note that a couple of requests will fail immediate validation (e.g. expired card) and will not generate a payment ID.
 
 # Project structure/Architecture
 #### Checkout.PaymentGateway.Api
