@@ -150,7 +150,7 @@ Unit tests covering the main functionality of the acquiring bank simulator.
 Assuming we were wanting to host this in Azure I would:
 * Deploy an app service plan (with scaleout enabled if deemed necessary) to host the API. These plans are flexible so we can change the level of resources at any time according to our needs.
 * Deploy a managed SQL instance for the database.
-* Put the above inside of a VPN, which will stop them being exposed directly to the internet.
+* Put the above inside of a VNET, which will stop them being exposed directly to the internet.
 * Deploy an API gateway to forward requests to the payment gateway API. This will give us load balancing (if we need it), authentication and various other benefits.
 * Duplicate everything to a second region for redunancy - We would need to replicate the data in our database across both regions.
 * I would use terraform to create the infrastructure, this would allow us to rapidly deploy our entire product in case of expansion or distaster recovery.
